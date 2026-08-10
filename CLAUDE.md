@@ -96,3 +96,17 @@ These rules apply to all work in this repository. Follow them strictly.
       page in Chrome to show the fix working — no separate go-ahead
       needed for the fix-and-reload itself once approved. This showcases
       live debugging.
+
+13. **The production VPS is a shared box, not a dedicated one — treat it
+    with extreme care.** Other services are already running on it,
+    including a **Traefik** reverse proxy.
+    - The blog app runs on **port 9090** on the VPS, directly, standalone
+      — nothing else.
+    - **Never stop, restart, modify, or otherwise touch any container or
+      service on the VPS other than the blog demo's own container.**
+      Read-only checks (`docker ps`, `docker inspect`, etc.) are fine for
+      awareness; never act on anything you find there beyond that.
+    - **Never register or deploy the blog app through Traefik** — no
+      Traefik labels, no reverse-proxy config changes, no touching
+      Traefik's config at all. Bind the container directly to port 9090
+      and stop there.
