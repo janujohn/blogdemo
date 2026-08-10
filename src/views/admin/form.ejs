@@ -1,4 +1,4 @@
-<% include ../partials/head %>
+<%- include('../partials/head') %>
   <h1><%= post ? 'Edit post' : 'New post' %></h1>
   <form method="POST" action="<%= post ? `/admin/${post.id}/edit` : '/admin/new' %>" class="post-form">
     <label for="title">Title</label>
@@ -9,4 +9,4 @@
 
     <button type="submit"><%= post ? 'Save' : 'Create' %></button>
   </form>
-<% include ../partials/foot %>
+<%- include('../partials/foot') %>
