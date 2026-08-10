@@ -15,7 +15,12 @@ router.get('/posts/:slug', (req, res) => {
     .prepare('SELECT * FROM posts WHERE slug = ?')
     .get(req.params.slug);
   if (!post) return res.status(404).render('not-found');
-  res.render('post', { post });
+
+  const paragraphs = post.body.split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+  const wordCount = post.body.trim().split(/\s+/).filter(Boolean).length;
+  const readingMinutes = Math.max(1, Math.round(wordCount / 200));
+
+  res.render('post', { post, paragraphs, readingMinutes });
 });
 
 module.exports = router;
