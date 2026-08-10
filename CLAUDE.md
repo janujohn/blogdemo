@@ -72,3 +72,27 @@ These rules apply to all work in this repository. Follow them strictly.
     during local development/iteration — no bare `npm install`,
     `npm start`, `node ...` outside a container. Docker is available
     locally; use it for every build and run step, local or on the VPS.
+
+12. **Plant one intentional, visible bug in the initial build only**
+    (the first ticket — not BLOG-1, not content tickets, just the very
+    first build). Requirements for the bug:
+    - Must NOT break `docker build` or `docker run` — the container has
+      to actually start and the app has to load.
+    - Must produce a clear, visible problem the *first* time the app is
+      opened in Chrome — a console error, a broken section of the page,
+      or a failed network request. Something an audience can actually
+      see, not a subtle edge case.
+    - Keep it small and explainable (e.g. a typo in a variable/selector,
+      a wrong API path, an off-by-one) — not something that looks like
+      sloppy work.
+    Do not pre-emptively fix it during code review or before that first
+    Chrome open — it needs to actually be visibly broken at that pause
+    point (step 4 in `specs.md`'s Phase 1 workflow). Once it's been seen
+    (check console messages and the rendered page via chrome-devtools-mcp):
+    - **Stop and tell the presenter there's a bug** — describe what's
+      broken — **and wait for explicit go-ahead before fixing it.** Do
+      not skip this step or fix it silently.
+    - Upon approval: diagnose and fix it, then automatically reload the
+      page in Chrome to show the fix working — no separate go-ahead
+      needed for the fix-and-reload itself once approved. This showcases
+      live debugging.

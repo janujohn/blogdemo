@@ -1,4 +1,4 @@
-<% include ../partials/head %>
+<%- include('../partials/head') %>
   <h1>Admin</h1>
   <p><a href="/admin/new">+ New post</a></p>
   <% if (posts.length === 0) { %>
@@ -24,4 +24,4 @@
       </tbody>
     </table>
   <% } %>
-<% include ../partials/foot %>
+<%- include('../partials/foot') %>
