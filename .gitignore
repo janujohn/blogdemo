@@ -1,0 +1,7 @@
+token
+node_modules/
+data/
+*.sqlite
+*.sqlite3
+.env
+.claude/
