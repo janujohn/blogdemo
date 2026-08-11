@@ -1,0 +1,25 @@
+<%- include("../partials/header", { title: "Admin" }) %>
+
+<h1>Admin</h1>
+<p><a class="button" href="/admin/new">+ New Post</a></p>
+
+<% if (posts.length === 0) { %>
+  <p>No posts yet.</p>
+<% } else { %>
+  <table class="post-table">
+    <thead>
+      <tr><th>Title</th><th>Created</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% posts.forEach(function (post) { %>
+        <tr>
+          <td><a href="/posts/<%= post.id %>"><%= post.title %></a></td>
+          <td><%= post.created_at %></td>
+          <td><a href="/admin/edit/<%= post.id %>">Edit</a></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+<% } %>
+
+<%- include("../partials/footer") %>
