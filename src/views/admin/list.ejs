@@ -1,0 +1,19 @@
+<%- include('../partials/header', { title: 'Admin - My Blog' }) %>
+
+<h1>Admin</h1>
+<p><a class="button" href="/admin/new">+ New Post</a></p>
+
+<% if (posts.length === 0) { %>
+  <p class="empty">No posts yet.</p>
+<% } else { %>
+  <ul class="post-list">
+    <% posts.forEach(post => { %>
+      <li class="post-list-item">
+        <a href="/posts/<%= post.id %>"><%= post.title %></a>
+        <a class="edit-link" href="/admin/edit/<%= post.id %>">Edit</a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('../partials/footer') %>
