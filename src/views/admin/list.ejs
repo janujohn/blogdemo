@@ -1,27 +1,19 @@
-<%- include('../partials/head') %>
-  <h1>Admin</h1>
-  <p><a href="/admin/new">+ New post</a></p>
-  <% if (posts.length === 0) { %>
-    <p class="empty">No posts yet.</p>
-  <% } else { %>
-    <table class="admin-table">
-      <thead>
-        <tr><th>Title</th><th>Updated</th><th></th></tr>
-      </thead>
-      <tbody>
-        <% posts.forEach(post => { %>
-          <tr>
-            <td><a href="/posts/<%= post.slug %>"><%= post.title %></a></td>
-            <td class="date"><%= post.updated_at %></td>
-            <td class="actions">
-              <a href="/admin/<%= post.id %>/edit">Edit</a>
-              <form method="POST" action="/admin/<%= post.id %>/delete" class="inline-form">
-                <button type="submit">Delete</button>
-              </form>
-            </td>
-          </tr>
-        <% }) %>
-      </tbody>
-    </table>
-  <% } %>
-<%- include('../partials/foot') %>
+<%- include('../partials/header', { title: 'Admin - My Blog' }) %>
+
+<h1>Admin</h1>
+<p><a class="button" href="/admin/new">+ New Post</a></p>
+
+<% if (posts.length === 0) { %>
+  <p class="empty">No posts yet.</p>
+<% } else { %>
+  <ul class="post-list">
+    <% posts.forEach(post => { %>
+      <li class="post-list-item">
+        <a href="/posts/<%= post.id %>"><%= post.title %></a>
+        <a class="edit-link" href="/admin/edit/<%= post.id %>">Edit</a>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('../partials/footer') %>

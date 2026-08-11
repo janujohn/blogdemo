@@ -1,7 +1,5 @@
-token
 node_modules/
 data/
-*.sqlite
-*.sqlite3
-.env
-.claude/
+*.db
+token
+.DS_Store
