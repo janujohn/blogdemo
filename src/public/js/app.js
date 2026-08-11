@@ -16,7 +16,7 @@ function renderPosts(posts) {
     .join("");
 }
 
-fetch("/api/post")
+fetch("/api/posts")
   .then((res) => res.json())
   .then(renderPosts)
   .catch((err) => console.error("Failed to load posts", err));
