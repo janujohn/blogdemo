@@ -125,7 +125,6 @@ article.post-body {
   font-size: 1.15rem;
   line-height: 1.75;
   color: #2a2a3a;
-  white-space: pre-wrap;
 }
 
 article.post-body p { margin: 0 0 26px; }

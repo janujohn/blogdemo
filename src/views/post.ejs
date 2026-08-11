@@ -28,6 +28,7 @@
     const formattedDate = postDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const wordCount = post.body.trim().split(/\s+/).filter(Boolean).length;
     const readMinutes = Math.max(1, Math.round(wordCount / 200));
+    const paragraphs = post.body.replace(/\r\n/g, '\n').split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
   %>
 
   <div class="post-meta">
@@ -41,7 +42,7 @@
   <div class="hero-image" role="img" aria-label="Featured image for <%= post.title %>"></div>
 
   <article class="post-body">
-    <% post.body.split(/\n+/).filter(line => line.trim()).forEach(paragraph => { %>
+    <% paragraphs.forEach(paragraph => { %>
       <p><%= paragraph %></p>
     <% }) %>
   </article>
