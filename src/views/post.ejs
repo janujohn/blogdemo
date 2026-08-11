@@ -1,10 +1,54 @@
-<%- include("partials/header", { title: post.title }) %>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= post.title %></title>
+  <link rel="stylesheet" href="/css/post.css" />
+</head>
+<body class="post-page">
 
-<article class="post">
-  <h1><%= post.title %></h1>
-  <p class="post-meta"><%= post.created_at %></p>
-  <div class="post-content"><%= post.content %></div>
-</article>
-<p><a href="/">&larr; Back to all posts</a></p>
+<header class="site-nav">
+  <a class="brand" href="/">Johnsi<span>Raani</span></a>
+  <nav class="links">
+    <a href="/">Home</a>
+    <a href="/admin">Admin</a>
+  </nav>
+</header>
 
-<%- include("partials/footer") %>
+<main>
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/">Posts</a> / <%= post.title %></div>
+
+  <span class="tag-pill">Blog</span>
+
+  <h1 class="post-title"><%= post.title %></h1>
+
+  <div class="post-meta">
+    <div class="avatar"></div>
+    <div>
+      <div class="author-name">Johnsiraani Manuel</div>
+      <div><%= formattedDate %> &middot; <%= readingTime %> min read</div>
+    </div>
+  </div>
+
+  <div class="hero-image" role="img" aria-label="Featured image"></div>
+
+  <article class="post-body">
+    <% paragraphs.forEach(function (paragraph) { %>
+      <p><%= paragraph %></p>
+    <% }) %>
+  </article>
+
+  <hr class="divider">
+
+  <div class="author-card">
+    <div class="avatar"></div>
+    <div>
+      <h3>Written by Johnsiraani Manuel</h3>
+      <p>Sharing notes on building and shipping software, one post at a time.</p>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
