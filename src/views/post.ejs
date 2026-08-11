@@ -1,0 +1,10 @@
+<%- include("partials/header", { title: post.title }) %>
+
+<article class="post">
+  <h1><%= post.title %></h1>
+  <p class="post-meta"><%= post.created_at %></p>
+  <div class="post-content"><%= post.content %></div>
+</article>
+<p><a href="/">&larr; Back to all posts</a></p>
+
+<%- include("partials/footer") %>
