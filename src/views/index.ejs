@@ -1,8 +1,12 @@
-<%- include("partials/header", { title: "My Blog" }) %>
+<%- include('partials/header', { title: 'My Blog' }) %>
 
-<h1>Latest Posts</h1>
-<div id="posts">Loading posts&hellip;</div>
+<section class="hero">
+  <h1>Welcome to My Blog</h1>
+  <p>Thoughts, updates, and stories.</p>
+</section>
 
-<script src="/js/app.js"></script>
+<section id="posts" class="post-list">
+  <p class="loading">Loading posts&hellip;</p>
+</section>
 
-<%- include("partials/footer") %>
+<%- include('partials/footer', { extraScript: '/static/js/app.js' }) %>

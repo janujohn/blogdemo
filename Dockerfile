@@ -1,8 +1,12 @@
-FROM node:20-slim
+FROM node:20-bookworm-slim
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends python3 make g++ \
+  && rm -rf /var/lib/apt/lists/*
+
+COPY package.json ./
 RUN npm install --omit=dev
 
 COPY src ./src

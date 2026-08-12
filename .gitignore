@@ -1,5 +1,5 @@
 node_modules/
 data/
 *.log
+.DS_Store
 token
-.claude/settings.local.json
