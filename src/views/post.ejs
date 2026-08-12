@@ -1,10 +1,68 @@
-<%- include('partials/header', { title: post.title, extraStyle: '/static/css/post.css' }) %>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= post.title %> &middot; My Blog</title>
+  <link rel="stylesheet" href="/static/css/post.css">
+</head>
+<body>
 
-<article class="post-full">
-  <h1><%= post.title %></h1>
-  <time><%= new Date(post.created_at).toLocaleDateString() %></time>
-  <div class="post-content"><%= post.content %></div>
-  <a href="/" class="back-link">&larr; Back to all posts</a>
-</article>
+<header class="site-nav">
+  <a href="/" class="brand">My<span>Blog</span></a>
+  <nav class="links">
+    <a href="/">Home</a>
+    <a href="/admin">Admin</a>
+  </nav>
+</header>
 
-<%- include('partials/footer') %>
+<main>
+  <div class="breadcrumb"><a href="/">Home</a> / <%= post.title %></div>
+
+  <span class="tag-pill">Post</span>
+
+  <h1 class="post-title"><%= post.title %></h1>
+
+  <div class="post-meta">
+    <div class="avatar"></div>
+    <div>
+      <div class="author-name">My Blog</div>
+      <div>
+        <%= new Date(post.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %>
+        &middot;
+        <%
+          const wordCount = post.content.trim().split(/\s+/).filter(Boolean).length;
+          const readMins = Math.max(1, Math.round(wordCount / 200));
+        %>
+        <%= readMins %> min read
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-image" role="img" aria-label="Featured image placeholder"></div>
+
+  <article class="post-body">
+    <%
+      const paragraphs = post.content.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+      const parasToRender = paragraphs.length ? paragraphs : [post.content];
+    %>
+    <% parasToRender.forEach(function(para) { %>
+      <p><%= para %></p>
+    <% }) %>
+  </article>
+
+  <hr class="divider">
+
+  <div class="author-card">
+    <div class="avatar"></div>
+    <div>
+      <h3>Written by My Blog</h3>
+      <p>Thoughts, updates, and stories from this blog.</p>
+    </div>
+  </div>
+
+  <p class="back-link"><a href="/">&larr; Back to all posts</a></p>
+</main>
+
+</body>
+</html>
