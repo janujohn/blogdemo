@@ -1,22 +1,26 @@
-function renderPosts(posts) {
-  const container = document.getElementById("posts");
-  if (posts.length === 0) {
-    container.innerHTML = "<p>No posts yet.</p>";
-    return;
+async function loadPosts() {
+  const container = document.getElementById('posts');
+  try {
+    const res = await fetch('/api/post');
+    if (!res.ok) throw new Error(`Request failed: ${res.status}`);
+    const posts = await res.json();
+
+    if (posts.length === 0) {
+      container.innerHTML = '<p class="empty">No posts yet.</p>';
+      return;
+    }
+
+    container.innerHTML = posts.map(post => `
+      <article class="post-card">
+        <h2><a href="/post/${post.id}">${post.title}</a></h2>
+        <time>${new Date(post.created_at).toLocaleDateString()}</time>
+        <p>${post.content.slice(0, 160)}${post.content.length > 160 ? '&hellip;' : ''}</p>
+      </article>
+    `).join('');
+  } catch (err) {
+    console.error('Failed to load posts:', err);
+    container.innerHTML = '<p class="error">Could not load posts.</p>';
   }
-  container.innerHTML = posts
-    .map(
-      (post) => `
-        <div class="post-card">
-          <h2><a href="/posts/${post.id}">${post.title}</a></h2>
-          <p class="post-meta">${post.created_at}</p>
-        </div>
-      `
-    )
-    .join("");
 }
 
-fetch("/api/posts")
-  .then((res) => res.json())
-  .then(renderPosts)
-  .catch((err) => console.error("Failed to load posts", err));
+document.addEventListener('DOMContentLoaded', loadPosts);

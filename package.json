@@ -2,7 +2,7 @@
   "name": "blogdemo",
   "version": "1.0.0",
   "private": true,
-  "description": "Simple blog app with a Node.js/Express backend, SQLite storage, and a server-rendered admin UI.",
+  "description": "Simple Node.js + SQLite blog app",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js"
@@ -10,6 +10,6 @@
   "dependencies": {
     "better-sqlite3": "^11.3.0",
     "ejs": "^3.1.10",
-    "express": "^4.19.2"
+    "express": "^4.21.0"
   }
 }
