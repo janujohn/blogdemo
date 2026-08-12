@@ -1,7 +1,7 @@
 async function loadPosts() {
   const container = document.getElementById('posts');
   try {
-    const res = await fetch('/api/post');
+    const res = await fetch('/api/posts');
     if (!res.ok) throw new Error(`Request failed: ${res.status}`);
     const posts = await res.json();
 
